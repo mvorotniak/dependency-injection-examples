@@ -2,12 +2,12 @@ package com.mvorodeveloper.springframeworkdi.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 import com.mvorodeveloper.springframeworkdi.repositories.EnglishGreetingRepository;
 import com.mvorodeveloper.springframeworkdi.repositories.EnglishGreetingRepositoryImpl;
-import com.mvorodeveloper.springframeworkdi.services.ConstructorInjectionGreetingService;
 import com.mvorodeveloper.springframeworkdi.services.I18nEnglishGreetingService;
 import com.mvorodeveloper.springframeworkdi.services.I18nSpanishGreetingService;
 import com.mvorodeveloper.springframeworkdi.services.PrimaryGreetingService;
@@ -17,6 +17,7 @@ import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingServ
 /**
  * Spring class based configuration
  */
+@ImportResource("classpath:spring-config.xml")
 @Configuration
 public class GreetingConfiguration {
 
@@ -48,11 +49,6 @@ public class GreetingConfiguration {
     @Bean
     PrimaryGreetingService primaryGreetingService() {
         return new PrimaryGreetingService();
-    }
-
-    @Bean
-    ConstructorInjectionGreetingService constructorInjectionGreetingService() {
-        return new ConstructorInjectionGreetingService();
     }
 
     @Bean
