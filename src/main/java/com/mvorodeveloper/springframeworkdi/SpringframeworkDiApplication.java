@@ -3,13 +3,14 @@ package com.mvorodeveloper.springframeworkdi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
 import com.mvorodeveloper.springframeworkdi.controllers.ConstructorInjectionController;
 import com.mvorodeveloper.springframeworkdi.controllers.HelloController;
 import com.mvorodeveloper.springframeworkdi.controllers.I18nController;
 import com.mvorodeveloper.springframeworkdi.controllers.PropertyInjectionController;
 import com.mvorodeveloper.springframeworkdi.controllers.SetterInjectionController;
+import com.mvorodeveloper.springframeworkdi.services.PrototypeBean;
+import com.mvorodeveloper.springframeworkdi.services.SingletonBean;
 
 //@ComponentScan({"com.mvorodeveloper.springframeworkdi", "com.some.package"}) -- example of non-default component scan
 @SpringBootApplication
@@ -39,6 +40,19 @@ public class SpringframeworkDiApplication {
 
 		I18nController i18nController = (I18nController) applicationContext.getBean("i18nController");
 		System.out.println(i18nController.sayHello());
+
+		System.out.println("-------Spring Bean Scopes-------");
+		// Only one instance of SingletonBean will be created and returned for every request
+		SingletonBean singletonBean1 = applicationContext.getBean(SingletonBean.class);
+		System.out.println(singletonBean1.getBeanScope());
+		SingletonBean singletonBean2 = applicationContext.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.getBeanScope());
+
+		// Every time we request for a bean of type PrototypeBean a new instance will be created and returned
+		PrototypeBean prototypeBean1 = applicationContext.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean1.getBeanScope());
+		PrototypeBean prototypeBean2 = applicationContext.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.getBeanScope());
 	}
 
 }
