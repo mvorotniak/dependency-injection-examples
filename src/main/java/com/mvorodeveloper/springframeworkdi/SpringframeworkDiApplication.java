@@ -3,6 +3,7 @@ package com.mvorodeveloper.springframeworkdi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.mvorodeveloper.springframeworkdi.controllers.ConstructorInjectionController;
 import com.mvorodeveloper.springframeworkdi.controllers.HelloController;
@@ -10,6 +11,7 @@ import com.mvorodeveloper.springframeworkdi.controllers.I18nController;
 import com.mvorodeveloper.springframeworkdi.controllers.PropertyInjectionController;
 import com.mvorodeveloper.springframeworkdi.controllers.SetterInjectionController;
 
+//@ComponentScan({"com.mvorodeveloper.springframeworkdi", "com.some.package"}) -- example of non-default component scan
 @SpringBootApplication
 public class SpringframeworkDiApplication {
 

@@ -1,11 +1,5 @@
 package com.mvorodeveloper.springframeworkdi.services;
 
-import org.springframework.stereotype.Service;
-
-/**
- * Spring Managed component
- */
-@Service
 public class ConstructorInjectionGreetingService implements GreetingService{
 
     @Override
