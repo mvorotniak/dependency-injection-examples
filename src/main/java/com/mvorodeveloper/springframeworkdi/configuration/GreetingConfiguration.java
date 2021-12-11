@@ -2,8 +2,13 @@ package com.mvorodeveloper.springframeworkdi.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 import com.mvorodeveloper.springframeworkdi.services.ConstructorInjectionGreetingService;
+import com.mvorodeveloper.springframeworkdi.services.I18nEnglishGreetingService;
+import com.mvorodeveloper.springframeworkdi.services.I18nSpanishGreetingService;
+import com.mvorodeveloper.springframeworkdi.services.PrimaryGreetingService;
 import com.mvorodeveloper.springframeworkdi.services.PropertyInjectionGreetingService;
 import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingService;
 
@@ -12,6 +17,31 @@ import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingServ
  */
 @Configuration
 public class GreetingConfiguration {
+
+    @Profile("ES")
+    @Bean("i18nGreetingService")
+    I18nSpanishGreetingService i18nSpanishGreetingService() {
+        return new I18nSpanishGreetingService();
+    }
+
+    /**
+     * This is the default profile if there's no active profile
+     */
+    @Profile({"EN", "default"})
+    @Bean
+    I18nEnglishGreetingService i18nGreetingService() {
+        return new I18nEnglishGreetingService();
+    }
+
+    /**
+     * This bean should be given preference when multiple candidates are qualified to autowire
+     * as it's annotated with the @Primary annotation. It doesn't take advantage to @Qualifier.
+     */
+    @Primary
+    @Bean
+    PrimaryGreetingService primaryGreetingService() {
+        return new PrimaryGreetingService();
+    }
 
     @Bean
     ConstructorInjectionGreetingService constructorInjectionGreetingService() {
