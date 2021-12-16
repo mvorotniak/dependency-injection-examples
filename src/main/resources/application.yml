@@ -11,7 +11,9 @@
 # Determines which i18nGreetingService to use for dependency injection
 spring:
   profiles:
-    active: ES,test
+    active:
+      -  ES
+      -  prod
 
 # Fake datasource properties
 mdev:
@@ -19,3 +21,16 @@ mdev:
   password: password_yml
   jdbc:
     url: jdbc:url:yml
+
+### Splitting into 2 documents
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+mdev:
+  username: username_yml_prod
+  password: password_yml_prod
+  jdbc:
+    url: jdbc:url:yml:prod
