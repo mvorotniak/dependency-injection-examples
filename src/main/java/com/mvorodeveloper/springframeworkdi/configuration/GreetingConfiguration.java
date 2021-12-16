@@ -21,7 +21,6 @@ import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingServ
  * Spring class based configuration
  */
 @ImportResource("classpath:spring-config.xml")
-@PropertySource("classpath:spring-dependency-injection.properties")
 @Configuration
 public class GreetingConfiguration {
 

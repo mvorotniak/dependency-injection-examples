@@ -1,0 +1,21 @@
+####################same as application.properties file####################
+#  # Determines which i18nGreetingService to use for dependency injection
+#  spring.profiles.active=ES,stage
+#
+#  # Fake datasource properties
+#  mdev.username=username
+#  mdev.password=password
+#  mdev.jdbc.url=jdbc:url
+###########################################################################
+
+# Determines which i18nGreetingService to use for dependency injection
+spring:
+  profiles:
+    active: ES
+
+# Fake datasource properties
+mdev:
+  username: username_yml
+  password: password_yml
+  jdbc:
+    url: jdbc:url:yml
