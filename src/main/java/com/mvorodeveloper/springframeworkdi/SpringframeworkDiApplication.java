@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import com.mvorodeveloper.springframeworkdi.configuration.DatasourceConfiguration;
 import com.mvorodeveloper.springframeworkdi.controllers.ConstructorInjectionController;
 import com.mvorodeveloper.springframeworkdi.controllers.HelloController;
 import com.mvorodeveloper.springframeworkdi.controllers.I18nController;
@@ -55,10 +56,17 @@ public class SpringframeworkDiApplication {
 		PrototypeBean prototypeBean2 = applicationContext.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getBeanScope());
 
+		System.out.println("-------FakeDataSource-------");
 		FakeDataSource fakeDataSource = applicationContext.getBean(FakeDataSource.class);
 		System.out.println("FakeDataSource username: " + fakeDataSource.getUsername());
 		System.out.println("FakeDataSource password: " + fakeDataSource.getPassword());
 		System.out.println("FakeDataSource JDBC url: " + fakeDataSource.getJdbcUrl());
+
+		System.out.println("-------DatasourceConfiguration-------");
+		DatasourceConfiguration datasourceConfiguration = applicationContext.getBean(DatasourceConfiguration.class);
+		System.out.println("DatasourceConfiguration username: " + datasourceConfiguration.getUsername());
+		System.out.println("DatasourceConfiguration password: " + datasourceConfiguration.getPassword());
+		System.out.println("DatasourceConfiguration JDBC url: " + datasourceConfiguration.getJdbcUrl());
 	}
 
 }

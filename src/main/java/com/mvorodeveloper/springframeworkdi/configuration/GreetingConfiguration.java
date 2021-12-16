@@ -24,15 +24,6 @@ import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingServ
 @Configuration
 public class GreetingConfiguration {
 
-    @Value("${mdev.username}")
-    private String username;
-
-    @Value("${mdev.password}")
-    private String password;
-
-    @Value("${mdev.jdbc.url}")
-    private String jdbcUrl;
-
     @Profile("ES")
     @Bean("i18nGreetingService")
     I18nSpanishGreetingService i18nSpanishGreetingService() {
@@ -74,11 +65,11 @@ public class GreetingConfiguration {
     }
 
     @Bean
-    FakeDataSource fakeDataSource() {
+    FakeDataSource fakeDataSource(DatasourceConfiguration datasourceConfiguration) {
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUsername(username);
-        fakeDataSource.setPassword(password);
-        fakeDataSource.setJdbcUrl(jdbcUrl);
+        fakeDataSource.setUsername(datasourceConfiguration.getUsername());
+        fakeDataSource.setPassword(datasourceConfiguration.getPassword());
+        fakeDataSource.setJdbcUrl(datasourceConfiguration.getJdbcUrl());
 
         return fakeDataSource;
     }
