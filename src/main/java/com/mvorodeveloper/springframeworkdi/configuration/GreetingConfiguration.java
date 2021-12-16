@@ -1,12 +1,11 @@
 package com.mvorodeveloper.springframeworkdi.configuration;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 
 import com.mvorodeveloper.springframeworkdi.datasource.FakeDataSource;
 import com.mvorodeveloper.springframeworkdi.repositories.EnglishGreetingRepository;
@@ -21,6 +20,7 @@ import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingServ
  * Spring class based configuration
  */
 @ImportResource("classpath:spring-config.xml")
+@EnableConfigurationProperties(DatasourceConstructorConfiguration.class)
 @Configuration
 public class GreetingConfiguration {
 
@@ -65,11 +65,11 @@ public class GreetingConfiguration {
     }
 
     @Bean
-    FakeDataSource fakeDataSource(DatasourceConfiguration datasourceConfiguration) {
+    FakeDataSource fakeDataSource(DatasourceConstructorConfiguration datasourceConstructorConfiguration) {
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUsername(datasourceConfiguration.getUsername());
-        fakeDataSource.setPassword(datasourceConfiguration.getPassword());
-        fakeDataSource.setJdbcUrl(datasourceConfiguration.getJdbcUrl());
+        fakeDataSource.setUsername(datasourceConstructorConfiguration.getUsername());
+        fakeDataSource.setPassword(datasourceConstructorConfiguration.getPassword());
+        fakeDataSource.setJdbcUrl(datasourceConstructorConfiguration.getJdbcUrl());
 
         return fakeDataSource;
     }
