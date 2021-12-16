@@ -1,0 +1,6 @@
+# Fake datasource properties
+mdev:
+  username: username_yml_test
+  password: password_yml_test
+  jdbc:
+    url: jdbc:url:yml:test
