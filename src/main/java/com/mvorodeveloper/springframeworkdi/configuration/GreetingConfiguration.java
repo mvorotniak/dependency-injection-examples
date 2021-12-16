@@ -1,11 +1,14 @@
 package com.mvorodeveloper.springframeworkdi.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 
+import com.mvorodeveloper.springframeworkdi.datasource.FakeDataSource;
 import com.mvorodeveloper.springframeworkdi.repositories.EnglishGreetingRepository;
 import com.mvorodeveloper.springframeworkdi.repositories.EnglishGreetingRepositoryImpl;
 import com.mvorodeveloper.springframeworkdi.services.I18nEnglishGreetingService;
@@ -18,8 +21,18 @@ import com.mvorodeveloper.springframeworkdi.services.SetterInjectionGreetingServ
  * Spring class based configuration
  */
 @ImportResource("classpath:spring-config.xml")
+@PropertySource("classpath:spring-dependency-injection.properties")
 @Configuration
 public class GreetingConfiguration {
+
+    @Value("${mdev.username}")
+    private String username;
+
+    @Value("${mdev.password}")
+    private String password;
+
+    @Value("${mdev.jdbc.url}")
+    private String jdbcUrl;
 
     @Profile("ES")
     @Bean("i18nGreetingService")
@@ -59,5 +72,15 @@ public class GreetingConfiguration {
     @Bean
     PropertyInjectionGreetingService propertyInjectionGreetingService() {
         return new PropertyInjectionGreetingService();
+    }
+
+    @Bean
+    FakeDataSource fakeDataSource() {
+        FakeDataSource fakeDataSource = new FakeDataSource();
+        fakeDataSource.setUsername(username);
+        fakeDataSource.setPassword(password);
+        fakeDataSource.setJdbcUrl(jdbcUrl);
+
+        return fakeDataSource;
     }
 }

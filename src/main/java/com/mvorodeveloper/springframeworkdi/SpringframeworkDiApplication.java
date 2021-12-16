@@ -9,6 +9,7 @@ import com.mvorodeveloper.springframeworkdi.controllers.HelloController;
 import com.mvorodeveloper.springframeworkdi.controllers.I18nController;
 import com.mvorodeveloper.springframeworkdi.controllers.PropertyInjectionController;
 import com.mvorodeveloper.springframeworkdi.controllers.SetterInjectionController;
+import com.mvorodeveloper.springframeworkdi.datasource.FakeDataSource;
 import com.mvorodeveloper.springframeworkdi.services.PrototypeBean;
 import com.mvorodeveloper.springframeworkdi.services.SingletonBean;
 
@@ -53,6 +54,11 @@ public class SpringframeworkDiApplication {
 		System.out.println(prototypeBean1.getBeanScope());
 		PrototypeBean prototypeBean2 = applicationContext.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getBeanScope());
+
+		FakeDataSource fakeDataSource = applicationContext.getBean(FakeDataSource.class);
+		System.out.println("FakeDataSource username: " + fakeDataSource.getUsername());
+		System.out.println("FakeDataSource password: " + fakeDataSource.getPassword());
+		System.out.println("FakeDataSource JDBC url: " + fakeDataSource.getJdbcUrl());
 	}
 
 }
